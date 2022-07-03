@@ -91,25 +91,19 @@ export class ServiceService {
       limit,
       offset,
     } = query;
-    const services = await this.repository
+    const [services, count] = await this.repository
       .createQueryBuilder("service")
       .where(`
         (service.name ILIKE any(ARRAY[:...keywords]) OR
         service.description ILIKE any(ARRAY[:...keywords])) AND
         service.deletedAt IS null
         `, { keywords })
-      .getMany();
-
-    const serviceIds = services.map(s => `${s.id}`)
-    const [serviceWithAssoc, count] = await this.repository
-      .createQueryBuilder("service")
-      .where(`service.id IN (:...serviceIds)`, { serviceIds })
       .innerJoinAndSelect("service.versions", "version")
       .orderBy(`service.${sortField}`, sortDirection)
-      .getManyAndCount();;
+      .getManyAndCount();
 
     return {
-      services: serviceWithAssoc.map(s => ({
+      services: services.map(s => ({
         id: s.id,
         name: s.name,
         description: s.description,
