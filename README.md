@@ -232,11 +232,3 @@ The `GET /service/:id` endpoint returns the `service` specified by `id` and any 
 - Properly mock typeorm's `Repository.createQueryBuilder()` function
 - Properly mock typeorm's `Connection` class
 
-
-### P1:
-- add postman package thing
-
-
-### P2:
-- add high level mockup of service diagram
-- use .env file for variables# Kong-Services-API
