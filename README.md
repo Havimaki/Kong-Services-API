@@ -2,7 +2,7 @@
 
 A CRUD API that handles the `Service` and `Version` entities.
 
-[**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Tech Stack**](#tech-stack) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps!) 
+[**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Tech Stack**](#tech-stack) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
 
 ## Run Locally
 
