@@ -70,8 +70,9 @@ While I did add some unit tests, there is still a lot more that can be done. Her
 | name        | | name  
 | description | | description
 | serviceId   | | createdAt 
-| createdAt   | | updateddAt  
-| updateddAt  | | deletedAt   
+| number      | | updateddAt  
+| createdAt   | | deletedAt   
+| updateddAt  | |
 | deletedAt   | |
 
 <!-- 
