@@ -166,8 +166,6 @@ GET /services
       description: string,
       versions: [ 
         {
-          id: number,
-          serviceId: number,
           name: string,
           desscription: string,
           number: string,
@@ -199,10 +197,9 @@ GET /service/:id
   description: string,
   versions: [ 
     {
-      id: number,
-      serviceId: number,
       name: string,
       desscription: string,
+      number: number,
     }
   ],
 }
