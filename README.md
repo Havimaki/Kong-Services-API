@@ -198,7 +198,7 @@ GET /service/:id
   versions: [ 
     {
       name: string,
-      desscription: string,
+      description: string,
       number: number,
     }
   ],
