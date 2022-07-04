@@ -11,7 +11,7 @@ import {
   Post,
   Delete,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { ServiceService } from './service.service';
 import {
   CreateServiceDto,
