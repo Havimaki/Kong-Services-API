@@ -15,7 +15,7 @@ A CRUD API that handles the `Service` and `Version` entities.
 
 ## Run Locally
 
-A postman package can be found [here](https://www.getpostman.com/collections/5da64b771d9a3ea9a3da). Simply copy that link and import it in Postman (Sorry, I didn't have an Insomnia package ready). There you will have access to all the CRUD endpoints for the `Service` and `Version` entities, as well as the login mechanism. I have added a simple Authentication mechanism to the application, so you will need to first login before being able to access any of the endpoints. Since there is no seeded data, feel free to play around with the `POST` requests before querying with any of the `GET`requests. (Or start off with a `GET` request to view its initial state).
+A postman package can be found [here](https://www.getpostman.com/collections/5da64b771d9a3ea9a3da). (Sorry, I didn't have an Insomnia package ready). Simply copy that link and import it in Postman and don't forget to add a new environment with an `access_token` key! This will hold the dynamic `access_token` variable which will populate the Bearer Token value for each subsequent request. There you will have access to all the CRUD endpoints for the `Service` and `Version` entities, as well as the login mechanism. I have added a simple Authentication mechanism to the application, so you will need to first login before being able to access any of the endpoints. Since there is no seeded data, feel free to play around with the `POST` requests before querying with any of the `GET`requests. (Or start off with a `GET` request to view its initial state).
 
 ```bash
 
