@@ -27,7 +27,7 @@ $ npm run test
 
 ## Design Considerations
 
-## <span style="color:#4B7BF5"> Tech Stack:</span>
+## Tech Stack:
 - Postgres v12
 - Node.js v14.17.0
 - Nest.js v6.10.14
@@ -35,7 +35,7 @@ $ npm run test
 - TypeScript 
 - Docker
 
-## <span style="color:#4B7BF5"> Data Modeling</span>
+## Data Modeling
 
 | Version     | | Service            
 |------------ |-|-----------          
@@ -60,7 +60,7 @@ VERSION
 ```
 -->
 
-### <span style="color:#4B7BF5"> Timestamps </span>
+### Timestamps 
 Both entities have timestamp columns as a useful way to verify:
 1. Record creation
 2. Record updates
@@ -75,7 +75,7 @@ the delete functionality. Typeorm filters out all records with a populated `dele
 field, but you can simply append `withDeleted()` should you ever need to query against 
 deleted records.
 
-### <span style="color:#4B7BF5"> Name VS Number columns</span>
+###  Name VS Number columns
 
 On the `Version` entity, there are three columns to take note of:
 
@@ -102,7 +102,7 @@ I would prefer the first option, as I follow the belief that the client should n
 
 *Assumption made: the version number will just be set to one decimal. Should there be need for two decimal points (IE. 1.0.0), then the column type would be a string value. Regardless, the X.X.X convention is still easier to validate and transform!*
 
-### <span style="color:#4B7BF5">Associations</span>
+### Associations
 
 A foreign key (`serviceId`) was also used on the `Version` entity in order to associate 
 a `version` with its associated `Service` entity and a unique index was set on the
@@ -115,7 +115,7 @@ When deleting a `version`, a check is performed to ensure there is more than one
 When deleting a `service`, all associated `versions` are deleted.
 
 
-## <span style="color:#4B7BF5">Querying</span>
+## Querying
 
 There is one `GET /services` endpoint but two ways to utilize it:
 
@@ -144,7 +144,7 @@ will be fetched and the second value will dictate what order (descending or asce
 This ordering is only done on the `Service` entity. The associated `versions` will be
 returned in ascending order of `id` / `createdAt`.
 
-## <span style="color:#4B7BF5">Return Payloads</span>
+## Return Payloads
 
 ```javascript
 GET /services
