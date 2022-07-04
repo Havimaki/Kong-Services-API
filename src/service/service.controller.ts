@@ -3,6 +3,7 @@ import {
   Controller,
   ParseIntPipe,
   InternalServerErrorException,
+  HttpException,
   Query,
   Param,
   Body,
@@ -41,6 +42,10 @@ export class ServiceController {
       limit = 12,
       offset = 1,
     } = q;
+
+    if (limit < 1) {
+      throw new HttpException('Limit cannot be zero!', 400);
+    }
 
     const keywords: string[] = query.split(',').map((q) => `%${q}%`);
     const sortQuery: sortQuery = sort.split(',').map((s) => s);
