@@ -17,9 +17,16 @@ A CRUD API that handles the `Service` and `Version` entities.
 
 A postman package can be found [here](https://www.getpostman.com/collections/5da64b771d9a3ea9a3da). Simply copy that link and import it in Postman (Sorry, I didn't have an Insomnia package ready). There you will have access to all the CRUD endpoints for the `Service` and `Version` entities, as well as the login mechanism. I have added a simple Authentication mechanism to the application, so you will need to first login before being able to access any of the endpoints. Since there is no seeded data, feel free to play around with the `POST` requests before querying with any of the `GET`requests. (Or start off with a `GET` request to view its initial state).
 
-
-
 ```bash
+
+# Postman setup
+Import with link: 
+https://www.getpostman.com/collections/5da64b771d9a3ea9a3da
+
+Add a new environment to your Postman client:
+  - Should be located in the top right corner of the client
+  - Name it `Kong Services API`
+  - Add `access_token` variable (Keep the value empty)
 
 # installation 
 $ npm install

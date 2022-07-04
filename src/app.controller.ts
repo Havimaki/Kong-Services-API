@@ -1,4 +1,6 @@
 import {
+  Injectable,
+  Inject,
   Controller,
   Get,
   Request,
@@ -9,12 +11,14 @@ import { AppService } from './app.service';
 import { LocalAuthGuard } from './auth/guard/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 
+@Injectable()
 @Controller()
 export class AppController {
-  constructor(
-    private appService: AppService,
-    private authService: AuthService
-  ) { }
+  @Inject(AppService)
+  private appService: AppService
+
+  @Inject(AuthService)
+  private authService: AuthService
 
   @Get()
   getHello(): string {
