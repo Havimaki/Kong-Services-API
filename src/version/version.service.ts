@@ -24,6 +24,14 @@ export class VersionService {
       number: Number(dto.number)
     }
 
+    const service = await this.repository
+      .createQueryBuilder("service")
+      .where("service.id = :serviceId", { serviceId: dto.serviceId })
+      .getCount();
+    if (service == 0) {
+      throw new HttpException('Service does not exist!', 404);
+    }
+
     return this.repository.save(version);
   }
 
@@ -41,7 +49,7 @@ export class VersionService {
   public async update(id: number, data: UpdateVersionDto): Promise<UpdateResult> {
     const version = await this.repository.findOne({ where: { id } })
     if (!version) {
-      throw new HttpException('Service does not exist!', 404);
+      throw new HttpException('Version does not exist!', 404);
     }
     return this.repository.update(id, data);
   }

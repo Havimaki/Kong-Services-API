@@ -102,7 +102,11 @@ export class ServiceService {
         id: s.id,
         name: s.name,
         description: s.description,
-        versions: s.versions,
+        versions: s.versions.map(v => ({
+          name: v.name,
+          description: v.description,
+          number: Number(v.number)
+        })),
         versionCount: s.versions.length,
       })),
       serviceCount: count,

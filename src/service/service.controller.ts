@@ -1,4 +1,5 @@
 import {
+  UseGuards,
   Controller,
   ParseIntPipe,
   InternalServerErrorException,
@@ -10,6 +11,7 @@ import {
   Post,
   Delete,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ServiceService } from './service.service';
 import {
   CreateServiceDto,
@@ -25,6 +27,7 @@ import {
   DeleteServiceData,
 } from './interface';
 
+@UseGuards(JwtAuthGuard)
 @Controller('services')
 export class ServiceController {
   constructor(private readonly service: ServiceService) { }

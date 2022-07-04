@@ -1,10 +1,13 @@
-import { Version } from '../../version/entity/version.entity';
-
+type Version = {
+  name: string,
+  description?: string,
+  number: number,
+}
 export interface ServiceWithAssociations {
   id: number,
   name: string,
   description?: string | null,
-  versions: Partial<Version[]>,
+  versions: Version[],
   versionCount?: number,
 };
 
