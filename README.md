@@ -36,19 +36,6 @@ $ npm run test
 - Docker
 
 ### <span style="color:#4B7BF5"> Data Modeling</span>
-<style>
-  .entity th {
-      background-color: black;
-      text-align: center;
-  }
-  .entity th:nth-child(2),
-  .entity td:nth-child(2)
-  {
-    background: black;
-  }
-
-</style>
-<div class="entity">
 
 | Version     | | Service            
 |------------ |-|-----------          
@@ -60,7 +47,6 @@ $ npm run test
 | updateddAt  | | deletedAt   
 | deletedAt   | |
 
-</div>
 <!-- 
 ```
 SERVICE
