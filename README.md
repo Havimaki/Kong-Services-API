@@ -2,6 +2,8 @@
 
 A CRUD API that handles the `Service` and `Version` entities.
 
+[**Run Locally**](#run-locally) | [**Tech Stack**](#tech-stack) | [**Authentication**](#authentication) | [**Test Plan**](#test-plan) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
+
 ## Tech Stack:
 - Postgres v12
 - Node.js v14.17.0
@@ -9,8 +11,6 @@ A CRUD API that handles the `Service` and `Version` entities.
 - TypeORM v0.2.45
 - TypeScript 
 - Docker
-
-[**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Test Plan**](#test-plan) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
 
 ## Run Locally
 
