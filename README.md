@@ -27,7 +27,7 @@ $ npm run test
 
 ## Design Considerations
 
-### <span style="color:#4B7BF5"> Tech Stack:</span>
+## <span style="color:#4B7BF5"> Tech Stack:</span>
 - Postgres v12
 - Node.js v14.17.0
 - Nest.js v6.10.14
@@ -35,7 +35,7 @@ $ npm run test
 - TypeScript 
 - Docker
 
-### <span style="color:#4B7BF5"> Data Modeling</span>
+## <span style="color:#4B7BF5"> Data Modeling</span>
 
 | Version     | | Service            
 |------------ |-|-----------          
@@ -115,7 +115,7 @@ When deleting a `version`, a check is performed to ensure there is more than one
 When deleting a `service`, all associated `versions` are deleted.
 
 
-### <span style="color:#4B7BF5">Querying</span>
+## <span style="color:#4B7BF5">Querying</span>
 
 There is one `GET /services` endpoint but two ways to utilize it:
 
@@ -144,7 +144,7 @@ will be fetched and the second value will dictate what order (descending or asce
 This ordering is only done on the `Service` entity. The associated `versions` will be
 returned in ascending order of `id` / `createdAt`.
 
-### <span style="color:#4B7BF5">Return Payloads</span>
+## <span style="color:#4B7BF5">Return Payloads</span>
 
 ```javascript
 GET /services
