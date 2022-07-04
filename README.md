@@ -2,7 +2,8 @@
 
 A CRUD API that handles the `Service` and `Version` entities.
 
-[**Run Locally**](#run-locally) | [**Tech Stack**](#tech-stack) | [**Authentication**](#authentication) | [**Test Plan**](#test-plan) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
+
+[**Tech Stack**](#tech-stack) | [**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Test Plan**](#test-plan) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
 
 ## Tech Stack:
 - Postgres v12
