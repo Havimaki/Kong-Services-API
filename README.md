@@ -2,7 +2,15 @@
 
 A CRUD API that handles the `Service` and `Version` entities.
 
-[**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Test Plan**](#test-plan) | [**Tech Stack**](#tech-stack) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
+## Tech Stack:
+- Postgres v12
+- Node.js v14.17.0
+- Nest.js v6.10.14
+- TypeORM v0.2.45
+- TypeScript 
+- Docker
+
+[**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Test Plan**](#test-plan) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps) 
 
 ## Run Locally
 
@@ -41,18 +49,10 @@ I added a simple authentication mechanism to the app, using `passport`. For the 
 While I did add some unit tests, there is still a lot more that can be done. Here are some next steps for a proper test suite:
 1. **Add unit tests with typeorm's Repository and Connection classes mocked.** These tests should mock all external libraries/parties/providers and test the input/ouput of a function, as well as what calls were made and with what arguments.
 2. **Add integration tests for all provider functions (`*.service.ts` files).** These tests should emulate the database as closely as possible. An example of a test would be inserting a record into a table and querying to ensure the function returns what is expected.
-3. **Use GitHub Actions to run these tests automatically.** This action can be triggerer basede on preference - EX. triggered either on every pull request, or every merge to the `main` branch.
+3. **Use GitHub Actions to run these tests automatically.** This action can be configured to trigger based on preference - EX. triggered either on every pull request, or every merge to the `main` branch.
 4. **Provision a test environment.** Ideally, there would be an environment that is tested against before deploying to production. This environment can be deployed to based on preference — EX. upon merging to `main` or for every pull request creation.
 
 ## Design Considerations
-
-## Tech Stack:
-- Postgres v12
-- Node.js v14.17.0
-- Nest.js v6.10.14
-- TypeORM v0.2.45
-- TypeScript 
-- Docker
 
 ## Data Modeling
 
