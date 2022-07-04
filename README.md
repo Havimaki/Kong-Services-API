@@ -7,7 +7,7 @@ A CRUD API that handles the `Service` and `Version` entities.
 ## Run Locally
 
 A postman package can be found [here](https://www.getpostman.com/collections/5da64b771d9a3ea9a3da). Simply copy that link and import it in Postman (Sorry, 
-I didn't have an Insomnia package ready). There you will have access to all the CRUD endpoints for the `Service` and `Version` entities. Since there is no seeded data, feel free to play around with the `POST` requests beforequerying with any of the `GET`requests. (Or start off with a `GET` request to view it's initial state).
+I didn't have an Insomnia package ready). There you will have access to all the CRUD endpoints for the `Service` and `Version` entities. Since there is no seeded data, feel free to play around with the `POST` requests before querying with any of the `GET`requests. (Or start off with a `GET` request to view it's initial state).
 
 ```bash
 
@@ -104,9 +104,7 @@ I would prefer the first option, as I follow the belief that the client should n
 
 ### Associations
 
-A foreign key (`serviceId`) was also used on the `Version` entity in order to associate 
-a `version` with its associated `Service` entity and a unique index was set on the
-`Version` entity between the `serviceId` and `number` columns.
+A foreign key (`serviceId`) was used on the `Version` entity in order to associate a `version` with its associated `Service` entity and a unique index was set on the `Version` entity between the `serviceId` and `number` columns.
 
 Every `service` is required to have at least one `version`. Therefore upon service creation, `version` field values are also an input requirement for the `POST /services` endpoint. 
 
