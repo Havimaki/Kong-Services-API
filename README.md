@@ -197,11 +197,11 @@ GET /services
   limit: number
 }
 ```
-`GET /services` returns an array of `services`, which includes its id, name and descriptions, plus any associated (non-deleted) `version` reccords. I decided to include the version records themselves alongside the count, as there is a small difference in the query itself (a select and count VS a find and count), and this way the client has more information to expand upon, should there be a need for the version details at a later date. A `serviceCount` is also included - that way, if the client queries with a limit of 5 records out of 10, if the client is on page 1, it knows that:
+`GET /services` returns an array of `services`, which includes its `id`, `name` and `description`, plus any associated (non-deleted) `version` reccords. I decided to include the version records themselves alongside the version count, as there is a small difference in the query itself (`.innerJoin().getCount()` vs `.innerJoinAndSelect().getManyAndCount()`), and this way the client has more information to expand upon, should there be a need for the version details at a later date. A `serviceCount` is also included - that way, if the client queries with a limit of 5 records out of 10, if the client is on page 1, it knows that:
 
 1. It's on page 1 (`offset: 1`)
-2. It's displaying services the first 5 services (`with a { limit: 5 } => (limit - offset) + 1`)
-4. It's displaying the current services out of the total services remaining on the next pages (`serviceCount: 10`)
+2. It's displaying the first 5 services (`with a { limit: 5 } => (limit - offset) + 1`)
+4. It's displaying the current 5 (`limit: 5`) services out of the total services of 10 (`serviceCount: 10`)
 
 While this calculation could have been set in the backend and simply returned something along the lines of `{ currentFirstId, currentLastId, lastId }`, this payload allows the frontend more flexibility, should it be changed later on to display page numbers instead of a count of services.
 
@@ -216,6 +216,7 @@ GET /service/:id
   versions: [ 
     {
       name: string,
+      serviceId: number,
       description: string,
       number: number,
     }
