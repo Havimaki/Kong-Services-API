@@ -167,7 +167,7 @@ GET /services
       versions: [ 
         {
           name: string,
-          desscription: string,
+          description: string,
           number: string,
         }
       ],
