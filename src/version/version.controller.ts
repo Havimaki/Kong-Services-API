@@ -33,15 +33,13 @@ export class VersionController {
   readonly version: VersionService;
 
   @Get()
-  public async getVersions(): Promise<getVersionsData> {
-    const versions = await this.version.read()
-    return { versions }
+  public async getVersions(): Promise<getVersionsData | []> {
+    return this.version.read()
   }
 
   @Get(':serviceId')
-  public async getVersion(@Param('serviceId', ParseIntPipe) serviceId: number): Promise<getVersionsData> {
-    const versions = await this.version.read(serviceId);
-    return { versions }
+  public async getVersion(@Param('serviceId', ParseIntPipe) serviceId: number): Promise<getVersionsData | []> {
+    return this.version.read(serviceId);
   }
 
   @Post()

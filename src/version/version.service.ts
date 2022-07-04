@@ -7,6 +7,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, UpdateResult, DeleteResult } from 'typeorm';
 import { Version } from './entity/version.entity';
 import {
+  getVersionsData,
+} from './interface';
+import {
   CreateVersionDto,
   UpdateVersionDto,
 } from './dto';
@@ -35,15 +38,27 @@ export class VersionService {
     return this.repository.save(version);
   }
 
-  public async read(serviceId?: number): Promise<Version[] | []> {
+  public async read(serviceId?: number): Promise<getVersionsData | []> {
     const queryBuilder = this.repository.createQueryBuilder("version");
+    let versions;
 
     if (serviceId) {
-      return queryBuilder
+      versions = await queryBuilder
         .where("version.serviceId = :serviceId", { serviceId })
         .getMany();
+    } else {
+      versions = await queryBuilder.getMany();
     }
-    return queryBuilder.getMany();
+
+    return {
+      versions: versions.map(v => ({
+        id: v.id,
+        serviceId: v.serviceId,
+        name: v.name,
+        description: v.description,
+        number: Number(v.number)
+      }))
+    }
   }
 
   public async update(id: number, data: UpdateVersionDto): Promise<UpdateResult> {
