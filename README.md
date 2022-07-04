@@ -230,6 +230,7 @@ The `GET /service/:id` endpoint returns the `service` specified by `id` and any 
 
 ## Next Steps!
 
+- Add a logger instance. Logging is everything when we debugging!!
 - Use GitHub actions to automatically run tests and deploy to a staging/prod environment
 - Add a cache layer for storing any calls that are made often. (Not totally necessary here, but something good to make note of)  
 - Properly mock typeorm's `Repository.createQueryBuilder()` function (Could not write all unit tests yet due to this)
