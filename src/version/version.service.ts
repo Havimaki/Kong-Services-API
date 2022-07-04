@@ -27,20 +27,31 @@ export class VersionService {
       number: Number(dto.number)
     }
 
-    const service = await this.repository
-      .createQueryBuilder("service")
-      .where("service.id = :serviceId", { serviceId: dto.serviceId })
-      .getCount();
-    if (service == 0) {
-      throw new HttpException('Service does not exist!', 404);
-    }
+    /**
+     * TODO: add validation
+     *  
+     * Commenting out below —
+     * Currently you can create a version against a deleted service
+     * However, if we implement the code below, we run into an issue where
+     * a service can't be created since it's wihin a transaction block 
+     * 
+     * 
+     * const service = await this.repository
+     * .createQueryBuilder("service")
+     * .where("service.id = :serviceId", { serviceId: dto.serviceId })
+     * .getCount();
+     * 
+     * if (service == 0) {
+     *  throw new HttpException('Service does not exist!', 404);
+     * }
+     */
 
     return this.repository.save(version);
   }
 
   public async read(serviceId?: number): Promise<getVersionsData | []> {
     const queryBuilder = this.repository.createQueryBuilder("version");
-    let versions;
+    let versions: Version[];
 
     if (serviceId) {
       versions = await queryBuilder
@@ -62,7 +73,7 @@ export class VersionService {
   }
 
   public async update(id: number, data: UpdateVersionDto): Promise<UpdateResult> {
-    const version = await this.repository.findOne({ where: { id } })
+    const version: Version = await this.repository.findOne({ where: { id } })
     if (!version) {
       throw new HttpException('Version does not exist!', 404);
     }
@@ -110,13 +121,10 @@ export class VersionService {
     }
 
     /**
-     * Choosing to use softDelete, as typeORM automatically 
-     * filters out records where deletedAt is not null.
-     * You can add withDeleted() if you do want to include soft deleted
-     * records in a select query.
-     * A soft deletion accomplishes in theory what a hard deletion is,
-     * except it's a bit safer and allows for a papertrail 
-     * of every record.
+     * Choosing to use softDelete, as typeORM automaticallyfilters out records where
+     * deletedAt is not null. You can add withDeleted() if you do want to include soft
+     * deleted records in a select query. A soft deletion accomplishes in theory what a
+     * hard deletion is,except it's a bit safer and allows for a papertrail of every record.
     */
     return this.repository.softDelete(serviceId)
   }

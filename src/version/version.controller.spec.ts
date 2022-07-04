@@ -11,6 +11,9 @@ import {
   CreateVersionDto,
   UpdateVersionDto,
 } from './dto';
+import {
+  getVersionsData,
+} from './interface';
 
 describe('Version Controller', () => {
   let moduleRef: TestingModule;
@@ -41,17 +44,15 @@ describe('Version Controller', () => {
   describe('GET', () => {
     it('should return read() result', async () => {
       // Given
-      const records: Version[] = [{
-        id: 1,
-        serviceId: 1,
-        name: faker.random.words(),
-        description: faker.random.words(),
-        number: faker.datatype.float(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        deletedAt: null,
-        service: serviceEntity,
-      }]
+      const records: getVersionsData = {
+        versions: [{
+          id: 1,
+          serviceId: 1,
+          name: faker.random.words(),
+          description: faker.random.words(),
+          number: faker.datatype.float(),
+        }]
+      }
 
       jest.spyOn(service, 'read').mockResolvedValue(records);
 
@@ -59,31 +60,29 @@ describe('Version Controller', () => {
       const res = await controller.getVersion(1)
 
       // Then
-      expect(res).toEqual({ versions: records })
+      expect(res).toEqual(records)
     })
   });
 
   describe('GET /:serviceId', () => {
     it('should return read() result', async () => {
       // Given
-      const records = [{
-        id: 1,
-        serviceId: 1,
-        name: faker.random.words(),
-        description: faker.random.words(),
-        number: faker.datatype.float(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        deletedAt: null,
-        service: serviceEntity,
-      }]
+      const records: getVersionsData = {
+        versions: [{
+          id: 1,
+          serviceId: 1,
+          name: faker.random.words(),
+          description: faker.random.words(),
+          number: faker.datatype.float(),
+        }]
+      }
       jest.spyOn(service, 'read').mockResolvedValue(records);
 
       // When
       const res = await controller.getVersion(1)
 
       // Then
-      expect(res).toEqual({ versions: records })
+      expect(res).toEqual(records)
     });
   });
 
