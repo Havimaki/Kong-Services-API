@@ -59,14 +59,9 @@ describe('Service Controller', () => {
           name: faker.random.words(),
           description: faker.random.words(),
           versions: [{
-            id: 1,
-            serviceId: 1,
             name: faker.random.words(),
             description: faker.random.words(),
             number: 1.0,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            service: serviceEntity,
           }],
         }],
         serviceCount: 1,
@@ -92,14 +87,9 @@ describe('Service Controller', () => {
         name: faker.random.words(),
         description: faker.random.words(),
         versions: [{
-          id: 1,
-          serviceId: 1,
           name: faker.random.words(),
           description: faker.random.words(),
           number: 1.0,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          service: serviceEntity,
         }],
       };
       jest.spyOn(service, 'readOne').mockResolvedValue(record);

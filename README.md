@@ -2,20 +2,24 @@
 
 A CRUD API that handles the `Service` and `Version` entities.
 
-[**Run Locally**](#run-locally) | [**Tech Stack**](#tech-stack) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Backlog**](#backlog) 
+[**Run Locally**](#run-locally) | [**Authentication**](#authentication) | [**Tech Stack**](#tech-stack) | [**Data Modeling**](#data-modeling) | [**Querying**](#querying) | [**Return Payloads**](#return-payloads) | [**Next Steps!**](#next-steps!) 
 
 ## Run Locally
 
-A postman package can be found [here](https://www.getpostman.com/collections/5da64b771d9a3ea9a3da). Simply copy that link and import it in Postman (Sorry, 
-I didn't have an Insomnia package ready). There you will have access to all the CRUD endpoints for the `Service` and `Version` entities. Since there is no seeded data, feel free to play around with the `POST` requests before querying with any of the `GET`requests. (Or start off with a `GET` request to view it's initial state).
+A postman package can be found [here](https://www.getpostman.com/collections/5da64b771d9a3ea9a3da). Simply copy that link and import it in Postman (Sorry, I didn't have an Insomnia package ready). There you will have access to all the CRUD endpoints for the `Service` and `Version` entities, as well as the login mechanism. I have added a simple Authentication mechanism to the application, so you will need to first login before being able to access any of the endpoints. Since there is no seeded data, feel free to play around with the `POST` requests before querying with any of the `GET`requests. (Or start off with a `GET` request to view its initial state).
+
+
 
 ```bash
 
 # installation 
 $ npm install
 
-# run development
+# build and run development
 $ npm run local:upbuild
+
+# re-run development
+$ npm run local:up
 
 # rebuild development and run
 $ npm run local:rebuild
@@ -24,6 +28,12 @@ $ npm run local:rebuild
 $ npm run test
 
 ```
+
+## Authentication
+
+I added a simple authentication mechanism to the app, using `passport`. For the sake of simplicity when testing out the APIs, I just stored one user in an array in the `users.service.ts` file. This could be easily pulled into the database as a `User` entity.
+
+*Note: I decided not to add .env to the .gitignore file, as an easier way to share the secrets. In a real life scenario, I would share the .env values in a safe manner (EX. using a one time link) or even going further than that, I could use AWS secrets manager to store these values. For the user password, I would use bcrypt to hash the password (or an encryption key) as the password shouldn't be stored as a plain text value ANYWHERE!*
 
 ## Design Considerations
 
@@ -34,7 +44,6 @@ $ npm run test
 - TypeORM v0.2.45
 - TypeScript 
 - Docker
-- (Authentication pending with passport.js)
 
 ## Data Modeling
 
@@ -203,9 +212,10 @@ The `GET /service/:id` endpoint returns the `service` specified by `id` and any 
 (non-deleted) `versions.`
 
 
-## Backlog
-- Add authentication with passport.js
-- Add a cache layer
+## Next Steps!
+
+- Use GitHub actions to automatically run tests and deploy to a staging/prod environment
+- Add a cache layer for storing any calls that are made often. (Not totally necessary here, but something good to make note of)  
 - Properly mock typeorm's `Repository.createQueryBuilder()` function (Could not write all unit tests yet due to this)
 - Properly mock typeorm's `Connection` class (Could not write service.service.spec.ts unit tests yet due to this)
 

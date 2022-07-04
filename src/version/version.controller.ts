@@ -1,4 +1,5 @@
 import {
+  UseGuards,
   Controller,
   Injectable,
   Inject,
@@ -11,6 +12,7 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { VersionService } from './version.service';
 import {
   CreateVersionDto,
@@ -23,6 +25,7 @@ import {
   deleteVersionData,
 } from './interface';
 
+@UseGuards(JwtAuthGuard)
 @Injectable()
 @Controller('versions')
 export class VersionController {

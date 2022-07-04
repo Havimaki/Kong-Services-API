@@ -68,7 +68,7 @@ describe('VersionService - repository', () => {
   });
 
   describe('read', () => {
-    it('should call queryBuilder only once', async () => {
+    it('should call queryBuilder twice', async () => {
       // Given
       const serviceId: number = 1;
 
@@ -76,7 +76,7 @@ describe('VersionService - repository', () => {
       await service.read(serviceId);
 
       // Then
-      expect(service.repository.createQueryBuilder).toHaveBeenCalledTimes(1);
+      expect(service.repository.createQueryBuilder).toHaveBeenCalledTimes(2);
     });
   });
 
