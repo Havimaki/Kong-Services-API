@@ -43,7 +43,7 @@ describe('Service Controller', () => {
       // Then
       expect(service.readMany).toHaveBeenCalledWith({
         keywords: ['%%'],
-        sortField: 'createdAt',
+        sortField: 'created_at',
         sortDirection: 'DESC',
         limit: 12,
         offset: 0

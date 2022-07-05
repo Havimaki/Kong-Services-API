@@ -97,16 +97,30 @@ export class ServiceService {
         (service.name ILIKE any(ARRAY[:...keywords]) OR
         service.description ILIKE any(ARRAY[:...keywords]))
         `, { keywords })
+      .orderBy(`service.${sortField}`, sortDirection)
       .limit(limit)
       .offset(offset)
       .getManyAndCount();
+
+    if (services.length == 0) {
+      return {
+        services: [],
+        serviceCount: count,
+        offset: (
+          Number(offset) <= 1 ?
+            Number(offset) + 1 :
+            Number(offset) / Number(limit) + 1
+        ),
+        limit: Number(limit),
+      };
+    };
 
     const serviceIds = services.map(s => `${s.id}`)
     const serviceWithAssoc = await this.repository
       .createQueryBuilder("service")
       .where(`service.id IN (:...serviceIds)`, { serviceIds })
-      .innerJoinAndSelect("service.versions", "version")
       .orderBy(`service.${sortField}`, sortDirection)
+      .innerJoinAndSelect("service.versions", "version")
       .getMany();
 
     return {
@@ -123,7 +137,11 @@ export class ServiceService {
         versionCount: s.versions.length,
       })),
       serviceCount: count,
-      offset: offset + 1,
+      offset: (
+        Number(offset) <= 1 ?
+          Number(offset) + 1 :
+          Number(offset) / Number(limit) + 1
+      ),
       limit: Number(limit),
     }
   }

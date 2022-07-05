@@ -66,7 +66,7 @@ export class ServiceController {
       sortField,
       sortDirection,
       limit,
-      offset: offset - 1,
+      offset: offset <= 1 ? 0 : Number(offset) * Number(limit) - Number(limit),
     });
   }
 
