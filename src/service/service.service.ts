@@ -109,6 +109,7 @@ export class ServiceService {
         name: s.name,
         description: s.description,
         versions: s.versions.map(v => ({
+          id: v.id,
           name: v.name,
           description: v.description,
           number: Number(v.number)

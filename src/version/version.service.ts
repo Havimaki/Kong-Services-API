@@ -118,11 +118,11 @@ export class VersionService {
     return this.repository.softDelete(id)
   }
 
-  public async deleteByServiceId(serviceId?: number): Promise<DeleteResult> {
+  public async deleteByServiceId(serviceId: number): Promise<DeleteResult> {
     this.logger.log(this.name, 'deleteByServiceId.')
     const versions = await this.repository
       .createQueryBuilder("version")
-      .where("version.id = :serviceId", { serviceId })
+      .where("version.serviceId = :serviceId", { serviceId })
       .getMany();
 
     if (!versions[0].id) {
@@ -130,11 +130,17 @@ export class VersionService {
     }
 
     /**
-     * Choosing to use softDelete, as typeORM automaticallyfilters out records where
-     * deletedAt is not null. You can add withDeleted() if you do want to include soft
-     * deleted records in a select query. A soft deletion accomplishes in theory what a
-     * hard deletion is,except it's a bit safer and allows for a papertrail of every record.
+     * Choosing to use softDelete, as typeORM automaticallyfilters 
+     * out records where deletedAt is not null. You can add withDeleted()
+     * if you do want to include softdeleted records in a select query. A
+     * soft deletion accomplishes in theory what a hard deletion is
+     * except it's a bit safer and allows for a papertrail of every
+     * record.
     */
-    return this.repository.softDelete(serviceId)
+    return this.repository
+      .createQueryBuilder("version")
+      .delete()
+      .where("serviceId = :serviceId", { serviceId })
+      .execute();
   }
 }

@@ -1,4 +1,5 @@
 type Version = {
+  id: number,
   name: string,
   description?: string,
   number: number,

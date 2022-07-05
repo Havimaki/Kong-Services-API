@@ -59,6 +59,7 @@ describe('Service Controller', () => {
           name: faker.random.words(),
           description: faker.random.words(),
           versions: [{
+            id: 1,
             name: faker.random.words(),
             description: faker.random.words(),
             number: 1.0,
@@ -87,6 +88,7 @@ describe('Service Controller', () => {
         name: faker.random.words(),
         description: faker.random.words(),
         versions: [{
+          id: 1,
           name: faker.random.words(),
           description: faker.random.words(),
           number: 1.0,
