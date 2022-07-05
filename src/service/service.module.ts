@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { LoggerModule } from '../logger/logger.module';
 import { ServiceController } from './service.controller';
 import { ServiceService } from './service.service';
 import { VersionModule } from '../version/version.module';
@@ -13,6 +14,7 @@ import { Version } from '../version/entity/version.entity';
       Version,
     ]),
     VersionModule,
+    LoggerModule,
   ],
   controllers: [ServiceController],
   providers: [ServiceService]

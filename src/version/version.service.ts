@@ -1,4 +1,5 @@
 import {
+  Logger,
   Injectable,
   HttpException,
   InternalServerErrorException,
@@ -16,10 +17,14 @@ import {
 
 @Injectable()
 export class VersionService {
+  name: string = 'VersionService';
+  private readonly logger = new Logger()
+
   @InjectRepository(Version)
   readonly repository: Repository<Version>;
 
   public async create(dto: CreateVersionDto): Promise<Version | null> {
+    this.logger.log(this.name, 'create.')
     const version: CreateVersionDto = {
       serviceId: Number(dto.serviceId),
       name: dto.name,
@@ -50,6 +55,7 @@ export class VersionService {
   }
 
   public async read(serviceId?: number): Promise<getVersionsData | []> {
+    this.logger.log(this.name, 'read.')
     const queryBuilder = this.repository.createQueryBuilder("version");
     let versions: Version[];
 
@@ -73,6 +79,7 @@ export class VersionService {
   }
 
   public async update(id: number, data: UpdateVersionDto): Promise<UpdateResult> {
+    this.logger.log(this.name, 'update.')
     const version: Version = await this.repository.findOne({ where: { id } })
     if (!version) {
       throw new HttpException('Version does not exist!', 404);
@@ -81,6 +88,7 @@ export class VersionService {
   }
 
   public async deleteById(id: number): Promise<DeleteResult> {
+    this.logger.log(this.name, 'deleteById.')
     const version = await this.repository
       .createQueryBuilder("version")
       .where("version.id = :id", { id })
@@ -111,6 +119,7 @@ export class VersionService {
   }
 
   public async deleteByServiceId(serviceId?: number): Promise<DeleteResult> {
+    this.logger.log(this.name, 'deleteByServiceId.')
     const versions = await this.repository
       .createQueryBuilder("version")
       .where("version.id = :serviceId", { serviceId })

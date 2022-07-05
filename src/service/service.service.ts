@@ -1,6 +1,7 @@
 import {
   Inject,
   Injectable,
+  Logger,
   HttpException,
   InternalServerErrorException,
 } from '@nestjs/common';
@@ -29,6 +30,9 @@ import {
 
 @Injectable()
 export class ServiceService {
+  name: string = 'ServiceService';
+  private readonly logger = new Logger();
+
   @Inject(Connection)
   private connection: Connection
 
@@ -39,6 +43,7 @@ export class ServiceService {
   readonly repository: Repository<Service>;
 
   public async create(body: CreateServiceDto): Promise<CreateServiceVersionData> {
+    this.logger.log(this.name, 'create.')
     let serviceRecord: Service;
     let versionRecord: Version;
 
@@ -78,6 +83,7 @@ export class ServiceService {
   }
 
   public async readMany(query: serviceQuery): Promise<GetServicesData> {
+    this.logger.log(this.name, 'readMany.')
     const {
       keywords,
       sortField,
@@ -116,6 +122,7 @@ export class ServiceService {
   }
 
   public async readOne(id: number): Promise<ServiceWithAssociations | null> {
+    this.logger.log(this.name, 'readOne.')
     return this.repository
       .createQueryBuilder("service")
       .where("service.id = :id", { id })
@@ -124,6 +131,7 @@ export class ServiceService {
   }
 
   public async update(id: number, data: UpdateServiceDto): Promise<UpdateResult> {
+    this.logger.log(this.name, 'update.')
     const service = await this.repository.findOne({ where: { id } })
     if (!service) {
       throw new HttpException('Service does not exist!', 404);
@@ -132,6 +140,7 @@ export class ServiceService {
   }
 
   public async delete(id: number): Promise<DeleteResult> {
+    this.logger.log(this.name, 'delete.')
     const service = await this.repository.findOne({ where: { id } })
     if (!service) {
       throw new HttpException('Service does not exist!', 404);
