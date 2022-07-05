@@ -42,7 +42,7 @@ export class ServiceController {
     this.logger.log(this.name, 'getServices.')
     const {
       query = "",
-      sort = "createdAt,DESC",
+      sort = "created_at,DESC",
       limit = 12,
       offset = 1,
     } = q;
@@ -50,6 +50,10 @@ export class ServiceController {
 
     if (limit < 1) {
       throw new HttpException('Limit cannot be zero!', 400);
+    }
+
+    if (sort == "") {
+      throw new HttpException('Sort cannot be zero!', 400);
     }
 
     const keywords: string[] = query.split(',').map((q) => `%${q}%`);

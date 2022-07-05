@@ -91,24 +91,30 @@ export class ServiceService {
       limit,
       offset,
     } = query;
-    const [services, count] = await this.repository
+    const services = await this.repository
       .createQueryBuilder("service")
-      .innerJoinAndSelect("service.versions", "version")
       .where(`
-        service.name ILIKE any(ARRAY[:...keywords]) OR
-        service.description ILIKE any(ARRAY[:...keywords]) 
+        (service.name ILIKE any(ARRAY[:...keywords]) OR
+        service.description ILIKE any(ARRAY[:...keywords])) AND
+        service.deletedAt IS null
         `, { keywords })
+      .getMany();
+
+    const serviceIds = services.map(s => `${s.id}`)
+    const [serviceWithAssoc, count] = await this.repository
+      .createQueryBuilder("service")
+      .where(`service.id IN (:...serviceIds)`, { serviceIds })
+      .innerJoinAndSelect("service.versions", "version")
       .orderBy(`service.${sortField}`, sortDirection)
-      .limit(limit)
-      .offset(offset)
-      .getManyAndCount();
+      .getManyAndCount();;
 
     return {
-      services: services.map(s => ({
+      services: serviceWithAssoc.map(s => ({
         id: s.id,
         name: s.name,
         description: s.description,
         versions: s.versions.map(v => ({
+          id: v.id,
           name: v.name,
           description: v.description,
           number: Number(v.number)
@@ -123,11 +129,24 @@ export class ServiceService {
 
   public async readOne(id: number): Promise<ServiceWithAssociations | null> {
     this.logger.log(this.name, 'readOne.')
-    return this.repository
+
+    const record = await this.repository
       .createQueryBuilder("service")
       .where("service.id = :id", { id })
       .innerJoinAndSelect("service.versions", "version")
       .getOne();
+
+    return {
+      id: record.id,
+      name: record.name,
+      description: record.description,
+      versions: record.versions.map(v => ({
+        id: v.id,
+        name: v.name,
+        description: v.description,
+        number: Number(v.number),
+      })),
+    }
   }
 
   public async update(id: number, data: UpdateServiceDto): Promise<UpdateResult> {
