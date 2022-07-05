@@ -1,4 +1,5 @@
 import {
+  Logger,
   Injectable,
   Inject,
 } from '@nestjs/common';
@@ -15,6 +16,9 @@ import {
 
 @Injectable()
 export class AuthService {
+  name: string = 'AuthService';
+  private readonly logger = new Logger();
+
   @Inject(UsersService)
   private usersService: UsersService;
 
@@ -22,6 +26,7 @@ export class AuthService {
   private jwtService: JwtService;
 
   async validateUser(payload: validateUserDto): Promise<ValidateUserInterface> {
+    this.logger.log(this.name, 'validateUser.')
     const user = await this.usersService.findOne(payload.username);
     if (user && user.password === payload.password) {
       return {
@@ -33,6 +38,7 @@ export class AuthService {
   }
 
   async login(user: LoginUserDto): Promise<LoginUserInterface> {
+    this.logger.log(this.name, 'login.')
     const payload = { username: user.username, sub: user.id };
     const token = await this.jwtService.sign(payload);
     return { access_token: token };

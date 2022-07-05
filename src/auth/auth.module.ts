@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { LoggerModule } from '../logger/logger.module';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategy/local.strategy';
 import { JwtStrategy } from './strategy/jwt.strategy';
@@ -17,6 +18,7 @@ import { jwtConstants } from './constants/jwt.constants';
         expiresIn: '3600s',  // setting for an hour
       },
     }),
+    LoggerModule,
   ],
   providers: [
     AuthService,

@@ -1,4 +1,5 @@
 import {
+  Logger,
   UseGuards,
   Controller,
   ParseIntPipe,
@@ -33,15 +34,19 @@ import {
 export class ServiceController {
   constructor(private readonly service: ServiceService) { }
 
+  name: string = 'ServiceController';
+  private readonly logger = new Logger()
+
   @Get()
   public async getServices(@Query() q): Promise<GetServicesData | Partial<GetServicesData>> {
-
+    this.logger.log(this.name, 'getServices.')
     const {
       query = "",
       sort = "createdAt,DESC",
       limit = 12,
       offset = 1,
     } = q;
+
 
     if (limit < 1) {
       throw new HttpException('Limit cannot be zero!', 400);
@@ -63,11 +68,13 @@ export class ServiceController {
 
   @Get(':id')
   public async getService(@Param('id', ParseIntPipe) id: number): Promise<ServiceWithAssociations> {
+    this.logger.log(this.name, 'getService.')
     return this.service.readOne(id);
   }
 
   @Post()
   public async createService(@Body() body: CreateServiceDto): Promise<CreateServiceData> {
+    this.logger.log(this.name, 'createService.')
     const result = await this.service.create(body);
 
     if (!result.service || !result.version) {
@@ -81,12 +88,14 @@ export class ServiceController {
 
   @Put(':id')
   public async updateService(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateServiceDto): Promise<UpdateServiceData> {
+    this.logger.log(this.name, 'updateService.')
     const result = await this.service.update(id, body);
     return { success: !!result.affected };
   }
 
   @Delete(':id')
   public async deleteService(@Param('id', ParseIntPipe) id: number): Promise<DeleteServiceData> {
+    this.logger.log(this.name, 'deleteService.')
     const result = await this.service.delete(id);
     return { success: !!result.affected };
   }
