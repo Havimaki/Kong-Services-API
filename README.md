@@ -54,7 +54,7 @@ I added a simple authentication mechanism to the app, using `passport`. For the 
 
 ## Test Plan
 
-*Note: See [branch](https://github.com/Havimaki/Kong-Services-API/tree/Feature/mock-typeorm) for any updates.*
+*Note: See on-going [PR](https://github.com/Havimaki/Kong-Services-API/pull/4) for any updates.*
 
 While I did add some unit tests, there is still a lot more that can be done. Here are some next steps for a proper test suite:
 1. **Add unit tests with typeorm's Repository and Connection classes mocked.** These tests should mock all external libraries/parties/providers and test the input/ouput of a function, as well as what calls were made and with what arguments. *NOTE: In all honesty, I struggled with this part, which blocked me from properly writing unit tests for the `*.service.spec.ts` files.*
