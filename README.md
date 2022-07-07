@@ -54,9 +54,11 @@ I added a simple authentication mechanism to the app, using `passport`. For the 
 
 ## Test Plan
 
+*Note: See [branch](https://github.com/Havimaki/Kong-Services-API/tree/Feature/mock-typeorm) for any updates.*
+
 While I did add some unit tests, there is still a lot more that can be done. Here are some next steps for a proper test suite:
-1. **Add unit tests with typeorm's Repository and Connection classes mocked.** These tests should mock all external libraries/parties/providers and test the input/ouput of a function, as well as what calls were made and with what arguments.
-2. **Add integration tests for all provider functions (`*.service.ts` files).** These tests should emulate the database as closely as possible. An example of a test would be inserting a record into a table and querying to ensure the function returns what is expected.
+1. **Add unit tests with typeorm's Repository and Connection classes mocked.** These tests should mock all external libraries/parties/providers and test the input/ouput of a function, as well as what calls were made and with what arguments. *NOTE: In all honesty, I struggled with this part, which blocked me from properly writing unit tests for the `*.service.spec.ts` files.*
+2. **Add integration tests for all provider functions (`*.service.ts` files).** These tests should emulate the database as closely as possible. An example of a test would be inserting a record into a table and querying to ensure the function returns what is expected. *NOTE: this would require Dockfile.test and docker-compose.test.yml files*
 3. **Use GitHub Actions to run these tests automatically.** This action can be configured to trigger based on preference - EX. triggered either on every pull request, or every merge to the `main` branch.
 4. **Provision a test environment.** Ideally, there would be an environment that is tested against before deploying to production. This environment can be deployed to based on preference — EX. upon merging to `main` or for every pull request creation.
 
