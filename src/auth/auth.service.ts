@@ -20,10 +20,10 @@ export class AuthService {
   private readonly logger = new Logger();
 
   @Inject(UsersService)
-  private usersService: UsersService;
+  readonly usersService: UsersService;
 
   @Inject(JwtService)
-  private jwtService: JwtService;
+  jwtService: JwtService;
 
   async validateUser(payload: validateUserDto): Promise<ValidateUserInterface> {
     this.logger.log(this.name, 'validateUser.')
