@@ -63,8 +63,7 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "src/service/service.service.spec.ts",
-      "src/auth/auth.service.spec.ts"
+      "src/service/service.service.spec.ts"
     ],
     "moduleFileExtensions": [
       "js",
